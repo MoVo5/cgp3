@@ -18,7 +18,6 @@ body {
   color: #35358D;
 }
 
-/* 상단 */
 header {
   display: flex;
   justify-content: space-between;
@@ -34,41 +33,37 @@ header {
 }
 
 .cash {
-  padding: 11px 18px;
+  padding: 12px 20px;
   border-radius: 30px;
   background: #FFF3C4;
   color: #8B6410;
-  font-size: 17px;
   font-weight: bold;
+  font-size: 18px;
 }
 
-/* 제목 */
 main {
   width: min(1100px, 92%);
-  margin: 38px auto 70px;
+  margin: 40px auto 70px;
 }
 
 h1 {
   text-align: center;
   font-size: 34px;
-  margin-bottom: 8px;
 }
 
 .subtitle {
   text-align: center;
   color: #7775A8;
-  margin-bottom: 32px;
+  margin-bottom: 35px;
 }
 
-/* 상품 배치 */
 .shop-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-.product,
-.coming {
+.product {
   overflow: hidden;
   border: 2px solid #E5E1FF;
   border-radius: 22px;
@@ -82,10 +77,10 @@ h1 {
 }
 
 .cover {
-  display: block;
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
+  display: block;
   border-radius: 13px;
 }
 
@@ -95,22 +90,21 @@ h1 {
 }
 
 .product-name {
-  margin: 0 0 10px;
   font-size: 19px;
   font-weight: 800;
+  margin: 0 0 12px;
 }
 
 .price {
-  margin: 0 0 16px;
-  color: #8B6410;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 900;
+  color: #A77A16;
+  margin-bottom: 18px;
 }
 
-/* 구매 버튼 */
 .buy {
   width: 100%;
-  padding: 13px;
+  padding: 14px;
   border: none;
   border-radius: 13px;
   background: #7772D8;
@@ -118,7 +112,6 @@ h1 {
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .buy:hover {
@@ -126,26 +119,34 @@ h1 {
   transform: translateY(-2px);
 }
 
-/* 준비중 */
+.buy:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+}
+
 .coming {
   min-height: 390px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(145deg, white, #F0EEFF);
+  border: 2px dashed #D9D4F5;
+  border-radius: 22px;
+  background: #F0EEFF;
   color: #AAA6D0;
   font-size: 22px;
   font-weight: bold;
 }
 
-/* 팝업 배경 */
+/* 중앙 팝업 */
+
 .modal {
   position: fixed;
   inset: 0;
   z-index: 1000;
   display: none;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   padding: 20px;
   background: #211B4D88;
 }
@@ -154,10 +155,9 @@ h1 {
   display: flex;
 }
 
-/* 팝업 창 */
 .modal-box {
   width: min(420px, 100%);
-  padding: 34px 25px 25px;
+  padding: 35px 25px;
   border: 3px solid #E7E3FF;
   border-radius: 25px;
   background: white;
@@ -169,7 +169,7 @@ h1 {
 @keyframes pop {
   from {
     opacity: 0;
-    transform: scale(0.88);
+    transform: scale(.85);
   }
   to {
     opacity: 1;
@@ -178,21 +178,19 @@ h1 {
 }
 
 .modal-icon {
-  margin-bottom: 12px;
-  font-size: 42px;
+  font-size: 45px;
+  margin-bottom: 15px;
 }
 
 .modal-message {
-  margin-bottom: 24px;
-  color: #35358D;
   font-size: 20px;
-  line-height: 1.5;
+  line-height: 1.6;
   font-weight: bold;
+  margin-bottom: 25px;
 }
 
 .modal-close {
-  min-width: 120px;
-  padding: 11px 24px;
+  padding: 12px 35px;
   border: none;
   border-radius: 12px;
   background: #7772D8;
@@ -202,16 +200,14 @@ h1 {
   cursor: pointer;
 }
 
-/* 모바일 */
-@media (max-width: 760px) {
+@media(max-width:760px) {
   .shop-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
 
   .coming {
-    min-height: 280px;
-    font-size: 18px;
+    min-height: 260px;
   }
 
   h1 {
@@ -219,38 +215,30 @@ h1 {
   }
 }
 
-@media (max-width: 460px) {
+@media(max-width:460px) {
   header {
-    padding: 17px 4%;
+    padding: 16px 4%;
   }
 
   .logo {
-    font-size: 23px;
+    font-size: 22px;
   }
 
   .cash {
-    padding: 9px 12px;
     font-size: 14px;
-  }
-
-  .shop-grid {
-    gap: 10px;
-  }
-
-  .cover-wrap {
-    padding: 8px;
+    padding: 10px;
   }
 
   .product-info {
-    padding: 11px 9px;
+    padding: 12px 8px;
   }
 
   .product-name {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .price {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .buy {
@@ -273,6 +261,7 @@ h1 {
 <main>
 
   <h1>공부 자료 상점</h1>
+
   <p class="subtitle">
     필요한 교재를 캐시로 구매해 보세요!
   </p>
@@ -281,61 +270,76 @@ h1 {
 
     <!-- 국어 -->
     <article class="product">
+
       <div class="cover-wrap">
         <img
           class="cover"
-          src="images/표지_국어.png"
-          alt="국어 교재"
+          src="./images/표지_국어.png"
+          alt="국어 교재 표지"
         >
       </div>
 
       <div class="product-info">
+
         <p class="product-name">1학년 국어 교재</p>
+
         <p class="price">1,000 💎</p>
 
-        <button class="buy" onclick="buyProduct('korean')">
+        <button class="buy"
+          onclick="buyProduct('korean', this)">
           구매하기
         </button>
+
       </div>
     </article>
 
     <!-- 수학 -->
     <article class="product">
+
       <div class="cover-wrap">
         <img
           class="cover"
-          src="images/표지_수학.png"
-          alt="수학 교재"
+          src="./images/표지_수학.png"
+          alt="수학 교재 표지"
         >
       </div>
 
       <div class="product-info">
+
         <p class="product-name">1학년 수학 교재</p>
+
         <p class="price">1,000 💎</p>
 
-        <button class="buy" onclick="buyProduct('math')">
+        <button class="buy"
+          onclick="buyProduct('math', this)">
           구매하기
         </button>
+
       </div>
     </article>
 
     <!-- 영어 -->
     <article class="product">
+
       <div class="cover-wrap">
         <img
           class="cover"
-          src="images/표지_영어.png"
-          alt="영어 교재"
+          src="./images/표지_영어.png"
+          alt="영어 교재 표지"
         >
       </div>
 
       <div class="product-info">
+
         <p class="product-name">1학년 영어 교재</p>
+
         <p class="price">1,000 💎</p>
 
-        <button class="buy" onclick="buyProduct('english')">
+        <button class="buy"
+          onclick="buyProduct('english', this)">
           구매하기
         </button>
+
       </div>
     </article>
 
@@ -348,7 +352,7 @@ h1 {
 
 </main>
 
-<!-- 구매 결과 팝업 -->
+<!-- 팝업 -->
 <div class="modal" id="messageModal">
 
   <div class="modal-box">
@@ -367,37 +371,68 @@ h1 {
 
 <script>
 
-/* 캐시 설정 */
+/* =================================
+   1. 기존 사이트 캐시 연동
+================================= */
+
 const CASH_KEY = "studyExerciseCash";
-const PRICE = 1000;
 
-/* PDF 파일 경로 */
-const products = {
+const PRODUCT_PRICE = 1000;
 
-  korean: "files/1학년_국어.pdf",
+/*
+  cgp2 사이트와 동일한 localStorage 키 사용
+  숫자 변환 과정에서 쉼표도 제거
+*/
 
-  math: "files/1학년_수학.pdf",
-
-  english: "files/1학년_영어.pdf"
-
-};
-
-/* 현재 캐시 가져오기 */
 function getCash() {
 
-  return Number(localStorage.getItem(CASH_KEY)) || 0;
+  const savedCash = localStorage.getItem(CASH_KEY);
+
+  const cash = Number(
+    String(savedCash ?? "0").replace(/,/g, "").trim()
+  );
+
+  return Number.isFinite(cash) && cash >= 0
+    ? cash
+    : 0;
 
 }
 
-/* 캐시 화면 업데이트 */
+
+/* =================================
+   2. 캐시 실시간 표시
+================================= */
+
 function updateCash() {
 
+  const cash = getCash();
+
   document.getElementById("cashBalance").textContent =
-    getCash().toLocaleString("ko-KR");
+    cash.toLocaleString("ko-KR");
 
 }
 
-/* 팝업 표시 */
+// 다른 탭에서 캐시가 변경되면 즉시 반영
+window.addEventListener("storage", function(event) {
+
+  if (event.key === CASH_KEY || event.key === null) {
+    updateCash();
+  }
+
+});
+
+// 같은 탭에서 변경되는 경우도 확인
+// 0.25초마다 최신 캐시 확인
+setInterval(updateCash, 250);
+
+// 처음 접속할 때 캐시 표시
+updateCash();
+
+
+/* =================================
+   3. 팝업 기능
+================================= */
+
 function showModal(message, icon) {
 
   document.getElementById("modalMessage").textContent =
@@ -410,20 +445,93 @@ function showModal(message, icon) {
 
 }
 
-/* 팝업 닫기 */
 function closeModal() {
 
   document.getElementById("messageModal").classList.remove("show");
 
 }
 
-/* 교재 구매 */
-function buyProduct(productId) {
 
+/* =================================
+   4. PDF 파일 경로
+================================= */
+
+const products = {
+
+  korean: {
+    name: "1학년_국어.pdf",
+    url: "./files/1학년_국어.pdf"
+  },
+
+  math: {
+    name: "1학년_수학.pdf",
+    url: "./files/1학년_수학.pdf"
+  },
+
+  english: {
+    name: "1학년_영어.pdf",
+    url: "./files/1학년_영어.pdf"
+  }
+
+};
+
+
+/* =================================
+   5. 실제 PDF 다운로드
+================================= */
+
+function downloadPDF(product) {
+
+  const link = document.createElement("a");
+
+  link.href = product.url;
+
+  link.download = product.name;
+
+  link.style.display = "none";
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  link.remove();
+
+}
+
+
+/* =================================
+   6. 교재 구매 기능
+================================= */
+
+function buyProduct(productId, button) {
+
+  // 중복 클릭 방지
+  if (button.disabled) {
+    return;
+  }
+
+  const product = products[productId];
+
+  if (!product) {
+    showModal("상품 정보를 찾을 수 없습니다.", "⚠️");
+    return;
+  }
+
+  // 현재 캐시를 숫자로 가져오기
   const currentCash = getCash();
 
-  /* 캐시 부족 */
-  if (currentCash < PRICE) {
+  // 가격도 숫자로 비교
+  const price = Number(PRODUCT_PRICE);
+
+  /*
+    예시:
+    현재 캐시 = 2682
+    교재 가격 = 1000
+
+    2682 >= 1000 이므로 구매 가능
+  */
+
+  if (currentCash < price) {
 
     showModal(
       "캐시가 부족합니다! 운동을 하고 올까요?",
@@ -434,42 +542,56 @@ function buyProduct(productId) {
 
   }
 
-  /* 캐시 차감 */
-  const remainingCash = currentCash - PRICE;
+  // 구매 전 잔액 다시 확인
+  const remainingCash = currentCash - price;
 
+  // 캐시 차감
   localStorage.setItem(
     CASH_KEY,
     String(remainingCash)
   );
 
+  // 화면 즉시 업데이트
   updateCash();
 
-  /* 구매 성공 팝업 */
-  showModal(
-    "구매하였습니다! 멋진 공부~",
-    "🎉"
-  );
+  // 중복 구매 클릭 방지
+  button.disabled = true;
 
-  /* PDF 다운로드 */
-  const link = document.createElement("a");
+  try {
 
-  link.href = products[productId];
+    // 실제 PDF 다운로드 실행
+    downloadPDF(product);
 
-  link.download = products[productId].split("/").pop();
+    // 구매 성공 팝업
+    showModal(
+      "구매하였습니다! 멋진 공부~",
+      "🎉"
+    );
 
-  document.body.appendChild(link);
+  } catch (error) {
 
-  link.click();
+    console.error("PDF 다운로드 오류:", error);
 
-  link.remove();
+    // 다운로드 실행에 실패한 경우 캐시 복구
+    localStorage.setItem(
+      CASH_KEY,
+      String(currentCash)
+    );
+
+    updateCash();
+
+    showModal(
+      "다운로드를 시작하지 못했습니다. 다시 시도해 주세요.",
+      "⚠️"
+    );
+
+  } finally {
+
+    button.disabled = false;
+
+  }
 
 }
-
-/* 다른 탭에서 캐시 변경 시 업데이트 */
-window.addEventListener("storage", updateCash);
-
-/* 처음 화면에 캐시 표시 */
-updateCash();
 
 </script>
 
