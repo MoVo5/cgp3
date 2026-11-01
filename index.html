@@ -270,76 +270,91 @@ h1 {
 
     <!-- 국어 -->
     <article class="product">
-
       <div class="cover-wrap">
-        <img
-          class="cover"
+        <img class="cover"
           src="./images/표지_국어.png"
-          alt="국어 교재 표지"
-        >
+          alt="국어 교재 표지">
       </div>
 
       <div class="product-info">
-
         <p class="product-name">1학년 국어 교재</p>
-
         <p class="price">1,000 💎</p>
-
         <button class="buy"
           onclick="buyProduct('korean', this)">
           구매하기
         </button>
-
       </div>
     </article>
 
     <!-- 수학 -->
     <article class="product">
-
       <div class="cover-wrap">
-        <img
-          class="cover"
+        <img class="cover"
           src="./images/표지_수학.png"
-          alt="수학 교재 표지"
-        >
+          alt="수학 교재 표지">
       </div>
 
       <div class="product-info">
-
         <p class="product-name">1학년 수학 교재</p>
-
         <p class="price">1,000 💎</p>
-
         <button class="buy"
           onclick="buyProduct('math', this)">
           구매하기
         </button>
-
       </div>
     </article>
 
     <!-- 영어 -->
     <article class="product">
-
       <div class="cover-wrap">
-        <img
-          class="cover"
+        <img class="cover"
           src="./images/표지_영어.png"
-          alt="영어 교재 표지"
-        >
+          alt="영어 교재 표지">
       </div>
 
       <div class="product-info">
-
         <p class="product-name">1학년 영어 교재</p>
-
         <p class="price">1,000 💎</p>
-
         <button class="buy"
           onclick="buyProduct('english', this)">
           구매하기
         </button>
+      </div>
+    </article>
 
+    <!-- 과학 -->
+    <article class="product">
+      <div class="cover-wrap">
+        <img class="cover"
+          src="./images/표지_과학.png"
+          alt="과학 교재 표지">
+      </div>
+
+      <div class="product-info">
+        <p class="product-name">1학년 과학 교재</p>
+        <p class="price">1,000 💎</p>
+        <button class="buy"
+          onclick="buyProduct('science', this)">
+          구매하기
+        </button>
+      </div>
+    </article>
+
+    <!-- 사회와 문화 -->
+    <article class="product">
+      <div class="cover-wrap">
+        <img class="cover"
+          src="./images/표지_사회와문화.png"
+          alt="사회와 문화 교재 표지">
+      </div>
+
+      <div class="product-info">
+        <p class="product-name">1학년 사회와 문화 교재</p>
+        <p class="price">1,000 💎</p>
+        <button class="buy"
+          onclick="buyProduct('society', this)">
+          구매하기
+        </button>
       </div>
     </article>
 
@@ -354,19 +369,13 @@ h1 {
 
 <!-- 팝업 -->
 <div class="modal" id="messageModal">
-
   <div class="modal-box">
-
     <div class="modal-icon" id="modalIcon">💎</div>
-
     <p class="modal-message" id="modalMessage"></p>
-
     <button class="modal-close" onclick="closeModal()">
       확인
     </button>
-
   </div>
-
 </div>
 
 <script>
@@ -376,26 +385,16 @@ h1 {
 ================================= */
 
 const CASH_KEY = "studyExerciseCash";
-
 const PRODUCT_PRICE = 1000;
 
-/*
-  cgp2 사이트와 동일한 localStorage 키 사용
-  숫자 변환 과정에서 쉼표도 제거
-*/
-
 function getCash() {
-
   const savedCash = localStorage.getItem(CASH_KEY);
 
   const cash = Number(
     String(savedCash ?? "0").replace(/,/g, "").trim()
   );
 
-  return Number.isFinite(cash) && cash >= 0
-    ? cash
-    : 0;
-
+  return Number.isFinite(cash) && cash >= 0 ? cash : 0;
 }
 
 
@@ -404,28 +403,19 @@ function getCash() {
 ================================= */
 
 function updateCash() {
-
   const cash = getCash();
 
   document.getElementById("cashBalance").textContent =
     cash.toLocaleString("ko-KR");
-
 }
 
-// 다른 탭에서 캐시가 변경되면 즉시 반영
 window.addEventListener("storage", function(event) {
-
   if (event.key === CASH_KEY || event.key === null) {
     updateCash();
   }
-
 });
 
-// 같은 탭에서 변경되는 경우도 확인
-// 0.25초마다 최신 캐시 확인
 setInterval(updateCash, 250);
-
-// 처음 접속할 때 캐시 표시
 updateCash();
 
 
@@ -434,21 +424,13 @@ updateCash();
 ================================= */
 
 function showModal(message, icon) {
-
-  document.getElementById("modalMessage").textContent =
-    message;
-
-  document.getElementById("modalIcon").textContent =
-    icon;
-
+  document.getElementById("modalMessage").textContent = message;
+  document.getElementById("modalIcon").textContent = icon;
   document.getElementById("messageModal").classList.add("show");
-
 }
 
 function closeModal() {
-
   document.getElementById("messageModal").classList.remove("show");
-
 }
 
 
@@ -471,31 +453,43 @@ const products = {
   english: {
     name: "1학년_영어.pdf",
     url: "./files/1학년_영어.pdf"
+  },
+
+  science: {
+    name: "1학년_과학.pdf",
+    url: "./files/1학년_과학.pdf"
+  },
+
+  society: {
+    name: "1학년_사회와문화.pdf",
+    url: "./files/1학년_사회와문화.pdf"
   }
 
 };
 
 
 /* =================================
-   5. 실제 PDF 다운로드
+   5. PDF 확인 및 다운로드
 ================================= */
 
-function downloadPDF(product) {
+async function downloadPDF(product) {
 
-  const link = document.createElement("a");
+  const response = await fetch(product.url);
 
-  link.href = product.url;
+  if (!response.ok) {
+    throw new Error("PDF 파일을 찾을 수 없습니다.");
+  }
 
-  link.download = product.name;
+  const blob = await response.blob();
 
-  link.style.display = "none";
+  // 실제 PDF 파일인지 확인
+  const signature = await blob.slice(0, 5).text();
 
-  document.body.appendChild(link);
+  if (signature !== "%PDF-") {
+    throw new Error("올바른 PDF 파일이 아닙니다.");
+  }
 
-  link.click();
-
-  link.remove();
-
+  return blob;
 }
 
 
@@ -503,9 +497,8 @@ function downloadPDF(product) {
    6. 교재 구매 기능
 ================================= */
 
-function buyProduct(productId, button) {
+async function buyProduct(productId, button) {
 
-  // 중복 클릭 방지
   if (button.disabled) {
     return;
   }
@@ -517,52 +510,58 @@ function buyProduct(productId, button) {
     return;
   }
 
-  // 현재 캐시를 숫자로 가져오기
   const currentCash = getCash();
 
-  // 가격도 숫자로 비교
-  const price = Number(PRODUCT_PRICE);
-
-  /*
-    예시:
-    현재 캐시 = 2682
-    교재 가격 = 1000
-
-    2682 >= 1000 이므로 구매 가능
-  */
-
-  if (currentCash < price) {
-
+  if (currentCash < PRODUCT_PRICE) {
     showModal(
       "캐시가 부족합니다! 운동을 하고 올까요?",
       "🏃"
     );
-
     return;
-
   }
 
-  // 구매 전 잔액 다시 확인
-  const remainingCash = currentCash - price;
-
-  // 캐시 차감
-  localStorage.setItem(
-    CASH_KEY,
-    String(remainingCash)
-  );
-
-  // 화면 즉시 업데이트
-  updateCash();
-
-  // 중복 구매 클릭 방지
   button.disabled = true;
 
   try {
 
-    // 실제 PDF 다운로드 실행
-    downloadPDF(product);
+    // 먼저 PDF가 실제로 존재하는지 확인
+    const pdfBlob = await downloadPDF(product);
 
-    // 구매 성공 팝업
+    // 다운로드 확인 후 캐시 차감
+    const latestCash = getCash();
+
+    if (latestCash < PRODUCT_PRICE) {
+      showModal(
+        "캐시가 부족합니다! 운동을 하고 올까요?",
+        "🏃"
+      );
+      return;
+    }
+
+    const remainingCash = latestCash - PRODUCT_PRICE;
+
+    localStorage.setItem(
+      CASH_KEY,
+      String(remainingCash)
+    );
+
+    updateCash();
+
+    // PDF 다운로드
+    const blobUrl = URL.createObjectURL(pdfBlob);
+
+    const link = document.createElement("a");
+    link.href = blobUrl;
+    link.download = product.name;
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(function() {
+      URL.revokeObjectURL(blobUrl);
+    }, 10000);
+
     showModal(
       "구매하였습니다! 멋진 공부~",
       "🎉"
@@ -570,18 +569,10 @@ function buyProduct(productId, button) {
 
   } catch (error) {
 
-    console.error("PDF 다운로드 오류:", error);
-
-    // 다운로드 실행에 실패한 경우 캐시 복구
-    localStorage.setItem(
-      CASH_KEY,
-      String(currentCash)
-    );
-
-    updateCash();
+    console.error("구매 또는 PDF 다운로드 오류:", error);
 
     showModal(
-      "다운로드를 시작하지 못했습니다. 다시 시도해 주세요.",
+      "PDF 파일을 찾을 수 없습니다. GitHub의 files 폴더와 파일 이름을 확인해 주세요.",
       "⚠️"
     );
 
@@ -597,8 +588,3 @@ function buyProduct(productId, button) {
 
 </body>
 </html>
-<img src="./images/표지_국어.png" alt="국어 교재">
-<img src="./images/표지_수학.png" alt="수학 교재">
-<img src="./images/표지_영어.png" alt="영어 교재">
-<img src="./images/표지_과학.png" alt="과학 교재">
-<img src="./images/표지_사회와문화.png" alt="사회와문화 교재">
