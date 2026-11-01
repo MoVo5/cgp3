@@ -171,6 +171,7 @@ h1 {
     opacity: 0;
     transform: scale(.85);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -271,14 +272,17 @@ h1 {
     <!-- 국어 -->
     <article class="product">
       <div class="cover-wrap">
-        <img class="cover"
+        <img
+          class="cover"
           src="./images/표지_국어.png"
-          alt="국어 교재 표지">
+          alt="국어 교재 표지"
+        >
       </div>
 
       <div class="product-info">
         <p class="product-name">1학년 국어 교재</p>
         <p class="price">1,000 💎</p>
+
         <button class="buy"
           onclick="buyProduct('korean', this)">
           구매하기
@@ -289,14 +293,17 @@ h1 {
     <!-- 수학 -->
     <article class="product">
       <div class="cover-wrap">
-        <img class="cover"
+        <img
+          class="cover"
           src="./images/표지_수학.png"
-          alt="수학 교재 표지">
+          alt="수학 교재 표지"
+        >
       </div>
 
       <div class="product-info">
         <p class="product-name">1학년 수학 교재</p>
         <p class="price">1,000 💎</p>
+
         <button class="buy"
           onclick="buyProduct('math', this)">
           구매하기
@@ -307,14 +314,17 @@ h1 {
     <!-- 영어 -->
     <article class="product">
       <div class="cover-wrap">
-        <img class="cover"
+        <img
+          class="cover"
           src="./images/표지_영어.png"
-          alt="영어 교재 표지">
+          alt="영어 교재 표지"
+        >
       </div>
 
       <div class="product-info">
         <p class="product-name">1학년 영어 교재</p>
         <p class="price">1,000 💎</p>
+
         <button class="buy"
           onclick="buyProduct('english', this)">
           구매하기
@@ -325,14 +335,17 @@ h1 {
     <!-- 과학 -->
     <article class="product">
       <div class="cover-wrap">
-        <img class="cover"
+        <img
+          class="cover"
           src="./images/표지_과학.png"
-          alt="과학 교재 표지">
+          alt="과학 교재 표지"
+        >
       </div>
 
       <div class="product-info">
-        <p class="product-name">1학년 과학 교재</p>
+        <p class="product-name">2학년 과학 교재</p>
         <p class="price">1,000 💎</p>
+
         <button class="buy"
           onclick="buyProduct('science', this)">
           구매하기
@@ -343,14 +356,17 @@ h1 {
     <!-- 사회와 문화 -->
     <article class="product">
       <div class="cover-wrap">
-        <img class="cover"
+        <img
+          class="cover"
           src="./images/표지_사회와문화.png"
-          alt="사회와 문화 교재 표지">
+          alt="사회와 문화 교재 표지"
+        >
       </div>
 
       <div class="product-info">
-        <p class="product-name">1학년 사회와 문화 교재</p>
+        <p class="product-name">2학년 사회와 문화 교재</p>
         <p class="price">1,000 💎</p>
+
         <button class="buy"
           onclick="buyProduct('society', this)">
           구매하기
@@ -369,32 +385,43 @@ h1 {
 
 <!-- 팝업 -->
 <div class="modal" id="messageModal">
+
   <div class="modal-box">
+
     <div class="modal-icon" id="modalIcon">💎</div>
+
     <p class="modal-message" id="modalMessage"></p>
+
     <button class="modal-close" onclick="closeModal()">
       확인
     </button>
+
   </div>
+
 </div>
 
 <script>
 
 /* =================================
-   1. 기존 사이트 캐시 연동
+   1. 기존 운동 사이트 캐시 연동
 ================================= */
 
 const CASH_KEY = "studyExerciseCash";
+
 const PRODUCT_PRICE = 1000;
 
 function getCash() {
+
   const savedCash = localStorage.getItem(CASH_KEY);
 
   const cash = Number(
     String(savedCash ?? "0").replace(/,/g, "").trim()
   );
 
-  return Number.isFinite(cash) && cash >= 0 ? cash : 0;
+  return Number.isFinite(cash) && cash >= 0
+    ? cash
+    : 0;
+
 }
 
 
@@ -403,19 +430,27 @@ function getCash() {
 ================================= */
 
 function updateCash() {
+
   const cash = getCash();
 
   document.getElementById("cashBalance").textContent =
     cash.toLocaleString("ko-KR");
+
 }
 
+// 다른 탭에서 캐시가 변경되면 반영
 window.addEventListener("storage", function(event) {
+
   if (event.key === CASH_KEY || event.key === null) {
     updateCash();
   }
+
 });
 
+// 캐시 변경 여부를 0.25초마다 확인
 setInterval(updateCash, 250);
+
+// 처음 접속할 때 캐시 표시
 updateCash();
 
 
@@ -424,13 +459,21 @@ updateCash();
 ================================= */
 
 function showModal(message, icon) {
-  document.getElementById("modalMessage").textContent = message;
-  document.getElementById("modalIcon").textContent = icon;
+
+  document.getElementById("modalMessage").textContent =
+    message;
+
+  document.getElementById("modalIcon").textContent =
+    icon;
+
   document.getElementById("messageModal").classList.add("show");
+
 }
 
 function closeModal() {
+
   document.getElementById("messageModal").classList.remove("show");
+
 }
 
 
@@ -456,13 +499,13 @@ const products = {
   },
 
   science: {
-    name: "1학년_과학.pdf",
-    url: "./files/1학년_과학.pdf"
+    name: "2학년_과학.pdf",
+    url: "./files/2학년_과학.pdf"
   },
 
   society: {
-    name: "1학년_사회와문화.pdf",
-    url: "./files/1학년_사회와문화.pdf"
+    name: "2학년_사문.pdf",
+    url: "./files/2학년_사문.pdf"
   }
 
 };
@@ -474,8 +517,10 @@ const products = {
 
 async function downloadPDF(product) {
 
+  // PDF 파일을 먼저 불러오기
   const response = await fetch(product.url);
 
+  // 파일이 없으면 오류 발생
   if (!response.ok) {
     throw new Error("PDF 파일을 찾을 수 없습니다.");
   }
@@ -490,6 +535,7 @@ async function downloadPDF(product) {
   }
 
   return blob;
+
 }
 
 
@@ -499,6 +545,7 @@ async function downloadPDF(product) {
 
 async function buyProduct(productId, button) {
 
+  // 중복 클릭 방지
   if (button.disabled) {
     return;
   }
@@ -506,17 +553,26 @@ async function buyProduct(productId, button) {
   const product = products[productId];
 
   if (!product) {
-    showModal("상품 정보를 찾을 수 없습니다.", "⚠️");
+
+    showModal(
+      "상품 정보를 찾을 수 없습니다.",
+      "⚠️"
+    );
+
     return;
   }
 
+  // 현재 캐시 확인
   const currentCash = getCash();
 
+  // 캐시 부족 확인
   if (currentCash < PRODUCT_PRICE) {
+
     showModal(
       "캐시가 부족합니다! 운동을 하고 올까요?",
       "🏃"
     );
+
     return;
   }
 
@@ -524,20 +580,23 @@ async function buyProduct(productId, button) {
 
   try {
 
-    // 먼저 PDF가 실제로 존재하는지 확인
+    // 먼저 PDF 파일이 실제로 있는지 확인
     const pdfBlob = await downloadPDF(product);
 
-    // 다운로드 확인 후 캐시 차감
+    // 다운로드 전에 최신 캐시 다시 확인
     const latestCash = getCash();
 
     if (latestCash < PRODUCT_PRICE) {
+
       showModal(
         "캐시가 부족합니다! 운동을 하고 올까요?",
         "🏃"
       );
+
       return;
     }
 
+    // 캐시 차감
     const remainingCash = latestCash - PRODUCT_PRICE;
 
     localStorage.setItem(
@@ -545,23 +604,30 @@ async function buyProduct(productId, button) {
       String(remainingCash)
     );
 
+    // 캐시 화면 업데이트
     updateCash();
 
-    // PDF 다운로드
+    // 실제 PDF 다운로드
     const blobUrl = URL.createObjectURL(pdfBlob);
 
     const link = document.createElement("a");
+
     link.href = blobUrl;
     link.download = product.name;
+    link.style.display = "none";
 
     document.body.appendChild(link);
+
     link.click();
+
     link.remove();
 
+    // 다운로드 주소 정리
     setTimeout(function() {
       URL.revokeObjectURL(blobUrl);
     }, 10000);
 
+    // 구매 성공 팝업
     showModal(
       "구매하였습니다! 멋진 공부~",
       "🎉"
